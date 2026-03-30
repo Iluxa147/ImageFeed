@@ -7,13 +7,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+final class ImagesListViewController: UIViewController {
+    // MARK: - UI
+    @IBOutlet private var tableView: UITableView!
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
-
-
 }
 
