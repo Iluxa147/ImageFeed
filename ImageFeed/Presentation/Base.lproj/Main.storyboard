@@ -32,19 +32,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="244"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="MdR-M8-IQN" userLabel="Cell Image">
-                                                    <rect key="frame" x="16" y="4" width="361" height="236"/>
-                                                    <color key="backgroundColor" name="YP Black"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="16"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </imageView>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YN4-V7-VU9" userLabel="ImageGradientedView">
                                                     <rect key="frame" x="16" y="4" width="361" height="236"/>
                                                     <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="MdR-M8-IQN" userLabel="Cell Image">
+                                                            <rect key="frame" x="0.0" y="0.0" width="361" height="236"/>
+                                                            <color key="backgroundColor" name="YP Black"/>
+                                                        </imageView>
                                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kk1-uY-nPN" customClass="UIGradientView" customModule="ImageFeed" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="206" width="361" height="30"/>
                                                             <constraints>
@@ -55,15 +49,19 @@
                                                                     <color key="value" name="Full Transparent"/>
                                                                 </userDefinedRuntimeAttribute>
                                                                 <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                                                    <color key="value" name="YP Background"/>
+                                                                    <color key="value" name="YP Black"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="MdR-M8-IQN" secondAttribute="trailing" id="0jA-He-pDr"/>
                                                         <constraint firstAttribute="trailing" secondItem="kk1-uY-nPN" secondAttribute="trailing" id="1Mb-fu-681"/>
+                                                        <constraint firstItem="MdR-M8-IQN" firstAttribute="leading" secondItem="YN4-V7-VU9" secondAttribute="leading" id="YAa-Pa-wLV"/>
                                                         <constraint firstItem="kk1-uY-nPN" firstAttribute="leading" secondItem="YN4-V7-VU9" secondAttribute="leading" id="keG-kj-smz"/>
                                                         <constraint firstAttribute="bottom" secondItem="kk1-uY-nPN" secondAttribute="bottom" id="mEU-zg-7qZ"/>
+                                                        <constraint firstItem="MdR-M8-IQN" firstAttribute="top" secondItem="YN4-V7-VU9" secondAttribute="top" id="xOS-ro-0B1"/>
+                                                        <constraint firstAttribute="bottom" secondItem="MdR-M8-IQN" secondAttribute="bottom" id="y6c-Ca-H0p"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -82,26 +80,22 @@
                                                     <state key="normal" image="Like button on"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 of April 2005" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8u4-ZC-OOH" userLabel="Date Label">
-                                                    <rect key="frame" x="23.999999999999993" y="220.33333333333334" width="92.333333333333314" height="15.666666666666657"/>
+                                                    <rect key="frame" x="23.999999999999993" y="216.33333333333334" width="92.333333333333314" height="15.666666666666657"/>
                                                     <fontDescription key="fontDescription" name="YandexSansDisplay-Regular" family="Yandex Sans Display" pointSize="13"/>
                                                     <color key="textColor" name="YP White"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="MdR-M8-IQN" firstAttribute="bottom" secondItem="8u4-ZC-OOH" secondAttribute="bottom" constant="4" id="5Ik-wf-0kq"/>
-                                                <constraint firstAttribute="bottom" secondItem="MdR-M8-IQN" secondAttribute="bottom" constant="4" id="7FR-CL-Qfs"/>
-                                                <constraint firstItem="ehl-T1-Eg9" firstAttribute="top" secondItem="MdR-M8-IQN" secondAttribute="top" id="D5n-RD-H7f"/>
-                                                <constraint firstItem="YN4-V7-VU9" firstAttribute="leading" secondItem="MdR-M8-IQN" secondAttribute="leading" id="HsI-H3-1Eo"/>
-                                                <constraint firstAttribute="trailing" secondItem="MdR-M8-IQN" secondAttribute="trailing" constant="16" id="IdQ-iZ-pBF"/>
-                                                <constraint firstItem="YN4-V7-VU9" firstAttribute="top" secondItem="MdR-M8-IQN" secondAttribute="top" id="K3a-fg-WiF"/>
-                                                <constraint firstItem="MdR-M8-IQN" firstAttribute="leading" secondItem="UOE-ks-fmM" secondAttribute="leading" constant="16" id="K7t-Od-JEJ"/>
-                                                <constraint firstItem="MdR-M8-IQN" firstAttribute="trailing" secondItem="YN4-V7-VU9" secondAttribute="trailing" id="OIn-10-s4S"/>
-                                                <constraint firstItem="MdR-M8-IQN" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8u4-ZC-OOH" secondAttribute="trailing" constant="8" id="RNZ-Eb-e8U"/>
-                                                <constraint firstItem="MdR-M8-IQN" firstAttribute="bottom" secondItem="YN4-V7-VU9" secondAttribute="bottom" id="TBs-DE-ZSr"/>
-                                                <constraint firstItem="8u4-ZC-OOH" firstAttribute="leading" secondItem="MdR-M8-IQN" secondAttribute="leading" constant="8" id="izm-fo-i2j"/>
-                                                <constraint firstItem="MdR-M8-IQN" firstAttribute="trailing" secondItem="ehl-T1-Eg9" secondAttribute="trailing" id="t4p-dC-asQ"/>
-                                                <constraint firstItem="MdR-M8-IQN" firstAttribute="top" secondItem="UOE-ks-fmM" secondAttribute="top" constant="4" id="ub0-DR-xsC"/>
+                                                <constraint firstItem="YN4-V7-VU9" firstAttribute="bottom" secondItem="8u4-ZC-OOH" secondAttribute="bottom" constant="8" id="5Ik-wf-0kq"/>
+                                                <constraint firstItem="ehl-T1-Eg9" firstAttribute="top" secondItem="YN4-V7-VU9" secondAttribute="top" id="D5n-RD-H7f"/>
+                                                <constraint firstItem="YN4-V7-VU9" firstAttribute="leading" secondItem="UOE-ks-fmM" secondAttribute="leading" constant="16" id="HsI-H3-1Eo"/>
+                                                <constraint firstItem="YN4-V7-VU9" firstAttribute="top" secondItem="UOE-ks-fmM" secondAttribute="top" constant="4" id="K3a-fg-WiF"/>
+                                                <constraint firstAttribute="trailing" secondItem="YN4-V7-VU9" secondAttribute="trailing" constant="16" id="OIn-10-s4S"/>
+                                                <constraint firstItem="YN4-V7-VU9" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8u4-ZC-OOH" secondAttribute="trailing" constant="8" id="RNZ-Eb-e8U"/>
+                                                <constraint firstAttribute="bottom" secondItem="YN4-V7-VU9" secondAttribute="bottom" constant="4" id="TBs-DE-ZSr"/>
+                                                <constraint firstItem="8u4-ZC-OOH" firstAttribute="leading" secondItem="YN4-V7-VU9" secondAttribute="leading" constant="8" id="izm-fo-i2j"/>
+                                                <constraint firstItem="YN4-V7-VU9" firstAttribute="trailing" secondItem="ehl-T1-Eg9" secondAttribute="trailing" id="t4p-dC-asQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="YP Black"/>
@@ -141,9 +135,6 @@
         <image name="Like button on" width="30" height="27"/>
         <namedColor name="Full Transparent">
             <color red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
-        <namedColor name="YP Background">
-            <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="YP Black">
             <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

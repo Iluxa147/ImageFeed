@@ -9,8 +9,8 @@ import UIKit
 
 @IBDesignable
 class UIGradientView: UIView {
-    @IBInspectable var startColor: UIColor = .red
-    @IBInspectable var endColor: UIColor = .green
+    @IBInspectable open var startColor: UIColor = .red
+    @IBInspectable open var endColor: UIColor = .green
     
     override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
