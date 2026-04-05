@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Gz-Dm-NeN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Hcf-gE-CRI">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
@@ -16,6 +16,27 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="IhG-5t-4Vs">
+            <objects>
+                <tabBarController id="Hcf-gE-CRI" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QOd-uT-ex2">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="selectedImageTintColor" name="YP White"/>
+                        <tabBarAppearance key="standardAppearance">
+                            <color key="backgroundColor" name="YP Black"/>
+                        </tabBarAppearance>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="Hck-dm-pli"/>
+                        <segue destination="9Gz-Dm-NeN" kind="relationship" relationship="viewControllers" id="Rlv-Lh-aVo"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cOx-sh-YKf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2425" y="-247"/>
+        </scene>
         <!--ImageList-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -107,13 +128,14 @@
                             <constraint firstAttribute="bottom" secondItem="kqV-GR-1hM" secondAttribute="bottom" id="vrZ-6r-OAD"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="tab_editorial_active" id="wS5-pt-jwf"/>
                     <connections>
                         <outlet property="tableView" destination="kqV-GR-1hM" id="BnY-t3-Aun"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="135.1145038167939" y="130.28169014084509"/>
+            <point key="canvasLocation" x="-1363" y="-546"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="pEs-nT-Atj">
@@ -178,6 +200,7 @@
                             <constraint firstItem="YzU-Jz-4VL" firstAttribute="trailing" secondItem="USE-EN-Xam" secondAttribute="trailing" constant="16" id="wtE-YP-GWT"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="tab_profile_active" id="QgY-Sc-YU9"/>
                     <connections>
                         <outlet property="buttonLogout" destination="USE-EN-Xam" id="JKt-0h-qgp"/>
                         <outlet property="labelUserName" destination="Qn1-eq-Wlb" id="hyy-3S-Xde"/>
@@ -188,7 +211,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bwo-lI-N50" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-404" y="-546"/>
+            <point key="canvasLocation" x="-1364" y="144"/>
         </scene>
     </scenes>
     <resources>
@@ -196,6 +219,8 @@
         <image name="Avatar mock" width="70" height="70"/>
         <image name="Like button on" width="30" height="27"/>
         <image name="Logout button" width="44" height="44"/>
+        <image name="tab_editorial_active" width="30" height="30"/>
+        <image name="tab_profile_active" width="30" height="30"/>
         <namedColor name="YP Black">
             <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
