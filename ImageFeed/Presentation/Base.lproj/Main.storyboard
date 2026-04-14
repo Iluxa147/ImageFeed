@@ -128,7 +128,7 @@
                             <constraint firstAttribute="bottom" secondItem="kqV-GR-1hM" secondAttribute="bottom" id="vrZ-6r-OAD"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="tab_editorial_active" id="80B-qw-jQO"/>
+                    <tabBarItem key="tabBarItem" title="" image="tab_editorial_active" id="80B-qw-jQO"/>
                     <navigationItem key="navigationItem" id="bMi-U6-ek0"/>
                     <connections>
                         <outlet property="tableView" destination="kqV-GR-1hM" id="BnY-t3-Aun"/>
@@ -147,14 +147,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Avatar mock" translatesAutoresizingMaskIntoConstraints="NO" id="xxm-ZQ-2pi" userLabel="Image Avatar">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="xxm-ZQ-2pi" userLabel="Image Avatar">
                                 <rect key="frame" x="16" y="134" width="70" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xxm-ZQ-2pi" secondAttribute="height" multiplier="1:1" id="MJl-p2-mye"/>
                                     <constraint firstAttribute="width" constant="70" id="v9k-Us-nu1"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="USE-EN-Xam" userLabel="Button Logout">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="USE-EN-Xam" userLabel="Button Logout">
                                 <rect key="frame" x="333" y="147" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="USE-EN-Xam" secondAttribute="height" multiplier="1:1" id="MeR-6b-YtS"/>
@@ -162,27 +162,24 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="Logout button"/>
-                                <connections>
-                                    <action selector="buttonLogoutTouchUp" destination="9Gz-Dm-NeN" eventType="touchUpInside" id="mX1-fw-07M"/>
-                                </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IRQ-Xw-4jY" userLabel="Stack View User Info">
-                                <rect key="frame" x="16" y="212" width="361" height="74.333333333333314"/>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IRQ-Xw-4jY" userLabel="Stack View User Info">
+                                <rect key="frame" x="16" y="212" width="361" height="39.333333333333343"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Екатерина Новикова" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qn1-eq-Wlb" userLabel="Label User Name">
-                                        <rect key="frame" x="0.0" y="0.0" width="361" height="27"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Екатерина Новикова" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qn1-eq-Wlb" userLabel="Label User Name">
+                                        <rect key="frame" x="0.0" y="0.0" width="361" height="0.0"/>
                                         <fontDescription key="fontDescription" name="YSDisplay-Bold" family="YS Display" pointSize="23"/>
                                         <color key="textColor" name="YP White"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@ekaterina_nov" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNt-te-A3n" userLabel="Label User Tag">
-                                        <rect key="frame" x="0.0" y="35" width="361" height="15.666666666666664"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="361" height="15.666666666666666"/>
                                         <fontDescription key="fontDescription" name="YandexSansDisplay-Regular" family="Yandex Sans Display" pointSize="13"/>
                                         <color key="textColor" name="YP Gray"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, world!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sz7-UP-KSp" userLabel="Label User Status">
-                                        <rect key="frame" x="0.0" y="58.666666666666679" width="361" height="15.666666666666664"/>
+                                        <rect key="frame" x="0.0" y="23.666666666666657" width="361" height="15.666666666666664"/>
                                         <fontDescription key="fontDescription" name="YandexSansDisplay-Regular" family="Yandex Sans Display" pointSize="13"/>
                                         <color key="textColor" name="YP White"/>
                                         <nil key="highlightedColor"/>
@@ -203,13 +200,6 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="tab_profile_active" id="QgY-Sc-YU9"/>
-                    <connections>
-                        <outlet property="buttonLogout" destination="USE-EN-Xam" id="JKt-0h-qgp"/>
-                        <outlet property="labelUserName" destination="Qn1-eq-Wlb" id="hyy-3S-Xde"/>
-                        <outlet property="labelUserStatus" destination="sz7-UP-KSp" id="eAq-YJ-G96"/>
-                        <outlet property="labelUserTag" destination="VNt-te-A3n" id="NEs-bZ-OZz"/>
-                        <outlet property="viewAvatar" destination="xxm-ZQ-2pi" id="CKg-A9-wDq"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bwo-lI-N50" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -288,7 +278,6 @@
     </scenes>
     <resources>
         <image name="0" width="1600" height="1059"/>
-        <image name="Avatar mock" width="70" height="70"/>
         <image name="Backward button" width="24" height="24"/>
         <image name="Like button on" width="30" height="27"/>
         <image name="Logout button" width="44" height="44"/>

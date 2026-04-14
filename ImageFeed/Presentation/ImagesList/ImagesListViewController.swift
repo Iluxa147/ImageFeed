@@ -23,20 +23,20 @@ final class ImagesListViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == ImagesListViewController.showSingleImageSegueIdentifier {
-             guard
-                 let viewController = segue.destination as? SingleImageViewController,
-                 let indexPath = sender as? IndexPath
-             else {
-                 assertionFailure("Invalid segue destination")
-                 return
-             }
-
-             let image = UIImage(named: photosNames[indexPath.row])
-             viewController.imageSplash = image
-         } else {
-             super.prepare(for: segue, sender: sender)
-         }
-     }
+            guard
+                let viewController = segue.destination as? SingleImageViewController,
+                let indexPath = sender as? IndexPath
+            else {
+                assertionFailure("Invalid segue destination")
+                return
+            }
+            
+            let image = UIImage(named: photosNames[indexPath.row])
+            viewController.imageSplash = image
+        } else {
+            super.prepare(for: segue, sender: sender)
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource

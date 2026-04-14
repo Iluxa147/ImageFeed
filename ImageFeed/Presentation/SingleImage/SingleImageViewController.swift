@@ -44,8 +44,9 @@ final class SingleImageViewController: UIViewController {
         guard let imageSplash else { return }
         let shareViewController = UIActivityViewController(
             activityItems: [imageSplash],
-            applicationActivities: nil
+            applicationActivities: nil,
         )
+        shareViewController.overrideUserInterfaceStyle = .dark
         present(shareViewController, animated: true, completion: nil)
     }
     
