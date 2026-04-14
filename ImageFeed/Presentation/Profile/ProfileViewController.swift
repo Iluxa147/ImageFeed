@@ -19,11 +19,11 @@ final class ProfileViewController: UIViewController {
     }
     
     // MARK: - UI
-    private var imageViewProfile: UIImageView?
-    private var buttonLogout: UIButton?
-    private var labelUserName: UILabel?
-    private var labelUserTag: UILabel?
-    private var labelUserStatus: UILabel?
+    private weak var imageViewProfile: UIImageView?
+    private weak var buttonLogout: UIButton?
+    private weak var labelUserName: UILabel?
+    private weak var labelUserTag: UILabel?
+    private weak var labelUserStatus: UILabel?
     
     // MARK: - Actions
     

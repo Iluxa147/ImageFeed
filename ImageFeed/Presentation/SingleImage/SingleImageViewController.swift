@@ -8,7 +8,7 @@
 import UIKit
 
 final class SingleImageViewController: UIViewController {
-    var imageSplash: UIImage? {
+    weak var imageSplash: UIImage? {
         didSet {
             guard isViewLoaded else { return }
             uiInitSplashImage()
