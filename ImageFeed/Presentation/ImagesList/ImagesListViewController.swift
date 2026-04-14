@@ -8,6 +8,8 @@
 import UIKit
 
 final class ImagesListViewController: UIViewController {
+    private static let showSingleImageSegueIdentifier = "ShowSingleImage"
+    
     // MARK: - UI
     @IBOutlet private weak var tableView: UITableView!
     
@@ -18,6 +20,23 @@ final class ImagesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == ImagesListViewController.showSingleImageSegueIdentifier {
+             guard
+                 let viewController = segue.destination as? SingleImageViewController,
+                 let indexPath = sender as? IndexPath
+             else {
+                 assertionFailure("Invalid segue destination")
+                 return
+             }
+
+             let image = UIImage(named: photosNames[indexPath.row])
+             viewController.imageSplash = image
+         } else {
+             super.prepare(for: segue, sender: sender)
+         }
+     }
 }
 
 // MARK: - UITableViewDataSource
@@ -47,7 +66,7 @@ extension ImagesListViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        performSegue(withIdentifier: ImagesListViewController.showSingleImageSegueIdentifier, sender: indexPath)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
