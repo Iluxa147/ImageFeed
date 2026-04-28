@@ -9,7 +9,7 @@ import UIKit
 
 extension UIImageView {
     func layerSetShapeCircle() {
-        layer.cornerRadius = frame.size.height / 2.0;
-        layer.masksToBounds = true;
+        layer.cornerRadius = frame.size.height / 2.0
+        layer.masksToBounds = true
     }
 }

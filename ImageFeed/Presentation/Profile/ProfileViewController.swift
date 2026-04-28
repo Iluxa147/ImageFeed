@@ -19,11 +19,11 @@ final class ProfileViewController: UIViewController {
     }
     
     // MARK: - UI
-    private weak var imageViewProfile: UIImageView?
-    private weak var buttonLogout: UIButton?
-    private weak var labelUserName: UILabel?
-    private weak var labelUserTag: UILabel?
-    private weak var labelUserStatus: UILabel?
+    private var imageViewProfile: UIImageView?
+    private var buttonLogout: UIButton?
+    private var labelUserName: UILabel?
+    private var labelUserTag: UILabel?
+    private var labelUserStatus: UILabel?
     
     // MARK: - Actions
     
@@ -60,10 +60,12 @@ final class ProfileViewController: UIViewController {
     }
     
     private func uiAddButtonLogout() {
-        guard let imageViewProfile else { return }
-        
+        guard let imageViewProfile,
+        let imageButtonLogout = UIImage(systemName: ConstantsInner.buttonLogoutImageName)
+        else { return }
+
         let buttonLogout = UIButton.systemButton(
-            with: UIImage(systemName: ConstantsInner.buttonLogoutImageName)!,
+            with: imageButtonLogout,
             target: self,
             action: #selector(self.buttonLogoutDidTap)
         )
