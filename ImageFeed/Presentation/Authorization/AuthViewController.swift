@@ -38,6 +38,20 @@ final class AuthViewController: UIViewController {
         print("AZAZA buttonAuthorizeDidTap")
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == AuthViewController.showWebViewSegueIdentifier {
+            guard
+                let webViewViewController = segue.destination as? WebViewViewController
+            else {
+                assertionFailure("Failed to prepare for segue \(AuthViewController.showWebViewSegueIdentifier)")
+                return
+            }
+            webViewViewController.wkNavDelegate = self
+        } else {
+            super.prepare(for: segue, sender: sender)
+        }
+    }
+    
     private func configureBackButton() {
         navigationController?.navigationBar.backIndicatorImage = UIImage(named: ConstantsInner.buttonNavBackBlackName)
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: ConstantsInner.buttonNavBackBlackName)
@@ -49,6 +63,16 @@ final class AuthViewController: UIViewController {
     //private func buttonAuthorizeDidTap() {
     //    //print("AZAZA buttonAuthorizeDidTap")
     //}
+}
+
+extension AuthViewController: WebViewViewControllerDelegate {
+    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
+        //TODO: process code
+    }
+
+    func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
+        vc.dismiss(animated: true)
+    }
 }
 
 /*
