@@ -10,7 +10,7 @@ import UIKit
 final class ProfileViewController: UIViewController {
     // MARK: - State
     private enum ConstantsInner {
-        static let profileImageNameMock = "Avatar mock"
+        static let profileImageNameMock = "avatar_mock"
         static let userNameMock = "Екатерина Новикова"
         static let userTagMock = "@ekaterina_nov"
         static let userStatusMock =  "Hello, world!"
