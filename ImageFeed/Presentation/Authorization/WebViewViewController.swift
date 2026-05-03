@@ -5,7 +5,6 @@
 //  Created by Ilya Pokolev on 29.04.2026.
 //
 
-import UIKit
 import WebKit
 
 protocol WebViewViewControllerDelegate: AnyObject {
@@ -14,27 +13,75 @@ protocol WebViewViewControllerDelegate: AnyObject {
 }
 
 final class WebViewViewController: UIViewController {
-    private enum WebViewConstants {
+    // MARK: - State
+    private enum ConstantsInner {
         static let unsplashAuthorizeUrlString = "https://unsplash.com/oauth/authorize"
     }
     
     weak var wkNavDelegate: WebViewViewControllerDelegate?
     
+    // MARK: - UI
     @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var progressView: UIProgressView!
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .darkContent
+    }
     
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //setNeedsStatusBarAppearanceUpdate()
         webView.navigationDelegate = self
-        
         loadAuthView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        setNeedsStatusBarAppearanceUpdate()
+        webView.addObserver(
+            self,
+            forKeyPath: #keyPath(WKWebView.estimatedProgress),
+            options: .new,
+            context: nil)
+        updateProgress()
+    }
+    
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        webView.removeObserver(
+            self,
+            forKeyPath: #keyPath(WKWebView.estimatedProgress),
+            context: nil)
+    }
+    
+    override func observeValue(
+        forKeyPath keyPath: String?,
+        of object: Any?,
+        change: [NSKeyValueChangeKey : Any]?,
+        context: UnsafeMutableRawPointer?
+    ) {
+        if keyPath == #keyPath(WKWebView.estimatedProgress) {
+            updateProgress()
+        } else {
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        }
+    }
+    
+    // MARK: - Private members
+    
+    private func updateProgress() {
+        progressView.progress = Float(webView.estimatedProgress)
+        progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
     }
     
     private func loadAuthView() {
-        guard var urlAuthComponents =
-                URLComponents(string: WebViewConstants.unsplashAuthorizeUrlString) else { return }
+        guard var urlAuthComponents = URLComponents(string: ConstantsInner.unsplashAuthorizeUrlString)
+        else { return }
         
         urlAuthComponents.queryItems = [
             URLQueryItem(name: "client_id", value: ConstantsApiUnsplash.accessKey),

@@ -7,43 +7,57 @@
 
 import UIKit
 
+protocol AuthViewControllerDelegate: AnyObject {
+    func didAuthenticate(_ vc: AuthViewController)
+}
+
 final class AuthViewController: UIViewController {
     // MARK: - State
     private enum ConstantsInner {
         static let buttonAuthorizeText = "Войти"
         static let buttonNavBackBlackName = "button_nav_back_black"
+        static let buttonNavBackWhiteName = "button_nav_back_white"
+        static let showWebViewSegueIdentifier = "ShowWebView"
     }
+    private let authService = OAuth2Service.shared
     
-    private static let showWebViewSegueIdentifier = "ShowWebView"
+    weak var delegate: AuthViewControllerDelegate?
     
     // MARK: - UI
-    //private var buttonAuthorize: UIButton?
     @IBOutlet private weak var buttonAuthorize: UIButton!
-    
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("AZAZ AuthView did load")
+        
         buttonAuthorize.layer.cornerRadius = 16
         configureBackButton()
-        
-        //uiAddLogoUnsplash()
-        //uiAddButtonAuthorize()
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .darkContent
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
     
     // MARK: - Actions
+    //@IBAction func buttonAuthorizeDidTap(_ sender: UIButton) {
+    //    print("AZAZA buttonAuthorizeDidTap")
+    //}
+}
 
-    @IBAction func buttonAuthorizeDidTap(_ sender: UIButton) {
-        print("AZAZA buttonAuthorizeDidTap")
-    }
-    
+extension AuthViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == AuthViewController.showWebViewSegueIdentifier {
+        if segue.identifier == ConstantsInner.showWebViewSegueIdentifier {
             guard
                 let webViewViewController = segue.destination as? WebViewViewController
             else {
-                assertionFailure("Failed to prepare for segue \(AuthViewController.showWebViewSegueIdentifier)")
+                assertionFailure("Failed to prepare for segue \(ConstantsInner.showWebViewSegueIdentifier)")
                 return
             }
             webViewViewController.wkNavDelegate = self
@@ -52,68 +66,57 @@ final class AuthViewController: UIViewController {
         }
     }
     
+    // MARK: - UI Initialization
     private func configureBackButton() {
-        navigationController?.navigationBar.backIndicatorImage = UIImage(named: ConstantsInner.buttonNavBackBlackName)
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: ConstantsInner.buttonNavBackBlackName)
+        navigationController?.navigationBar.backIndicatorImage = UIImage(named: ConstantsInner.buttonNavBackWhiteName)
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: ConstantsInner.buttonNavBackWhiteName)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem?.tintColor = UIColor(resource: ColorResource.ypBlack)
     }
-    
-    //@objc
-    //private func buttonAuthorizeDidTap() {
-    //    //print("AZAZA buttonAuthorizeDidTap")
-    //}
 }
 
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        //TODO: process code
+        //assert(Thread.isMainThread)
+        print("AZAZ web del 1")
+        //vc.dismiss(animated: true)
+        
+        fetchOAuthToken(code) { [weak self] result in
+            assert(Thread.isMainThread)
+            guard let self else {
+                print("AZAZ self 2 is nil")
+                return
+            }
+            vc.dismiss(animated: true)
+            print("AZAZ check 1")
+            
+            switch result {
+            case .success(let token):
+                //print("Auth token get succeed \(token)")
+                self.delegate?.didAuthenticate(self)
+            case .failure(let error):
+                // TODO handle error further
+                //print("Auth token get failed with error \(error)")
+            }
+        }
     }
-
+    
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
         vc.dismiss(animated: true)
     }
 }
 
-/*
- private extension AuthViewController {
- // MARK: - UI Initial
- 
- private func uiAddLogoUnsplash() {
- let imageLogo = UIImage(named: AppUiConstants.logoUnsplash)
- let imageViewLogo = UIImageView(image: imageLogo)
- 
- imageViewLogo.translatesAutoresizingMaskIntoConstraints = false
- view.addSubview(imageViewLogo)
- NSLayoutConstraint.activate([
- imageViewLogo.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
- imageViewLogo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 280),
- imageViewLogo.heightAnchor.constraint(equalToConstant: 60),
- imageViewLogo.widthAnchor.constraint(equalToConstant: 60),
- ])
- }
- 
- private func uiAddButtonAuthorize() {
- buttonAuthorize = UIButton(type: .system)
- guard let buttonAuthorize else { return }
- 
- buttonAuthorize.addTarget(self, action: #selector(self.buttonAuthorizeDidTap), for: .touchUpInside)
- buttonAuthorize.backgroundColor = UIColor(resource: ColorResource.ypWhite)
- buttonAuthorize.layer.cornerRadius = 16
- 
- buttonAuthorize.setTitle(ConstantsInner.buttonAuthorizeText, for: .normal)
- buttonAuthorize.setTitleColor(UIColor(resource: ColorResource.ypBlack), for: .normal)
- buttonAuthorize.titleLabel?.font = UIFont(name: AppUiConstants.fontBold, size: AppUiConstants.fontSizeMedium)
- 
- buttonAuthorize.translatesAutoresizingMaskIntoConstraints = false
- view.addSubview(buttonAuthorize)
- NSLayoutConstraint.activate([
- buttonAuthorize.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 24),
- buttonAuthorize.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
- buttonAuthorize.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -124),
- buttonAuthorize.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
- buttonAuthorize.heightAnchor.constraint(equalToConstant: 48),
- ])
- }
- }
- */
+extension AuthViewController {
+    private func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
+        authService.fetchOAuthToken(code: code) { result in
+            //guard self != nil else {
+            //    print("AZAZ self 1 is nil")
+            //    return
+            //}
+            
+            DispatchQueue.main.async {
+                completion(result)
+            }
+        }
+    }
+}

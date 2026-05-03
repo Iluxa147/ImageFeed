@@ -40,7 +40,7 @@ final class ProfileViewController: UIViewController {
         uiAddLabelsProfileDesc()
     }
     
-    // MARK: - UI Initial
+    // MARK: - UI Initialization
     
     private func uiAddProfileImage() {
         let imageProfile = UIImage(named: ConstantsInner.profileImageNameMock)

@@ -15,4 +15,5 @@ struct AppUiConstants {
     static let fontSizeNormal = 13.0
     
     static let logoUnsplash = "logo_unsplash"
+    static let appIcon = "app_icon"
 }
