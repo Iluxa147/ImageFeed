@@ -32,7 +32,6 @@ final class WebViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //setNeedsStatusBarAppearanceUpdate()
         webView.navigationDelegate = self
         loadAuthView()
     }

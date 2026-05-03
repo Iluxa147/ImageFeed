@@ -14,13 +14,6 @@ final class OAuth2Service {
     private let tokenStorage = OAuth2TokenStorage.shared
     
     func fetchOAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
-        //let completionOnTheMainThread: (Result<String, Error>) -> Void = { result in
-        //    DispatchQueue.main.async {
-        //        print("AZAZ fe \(result)")
-        //        completion(result)
-        //    }
-        //}
-        
         let completionHandler: (Result<String, Error>) -> Void = { result in
             assert(Thread.isMainThread)
             switch result {
@@ -30,7 +23,7 @@ final class OAuth2Service {
                 print("Auth token get failed with error: \(error.localizedDescription)")
             }
         }
-            
+        
         guard let request = makeOAuthTokenRequest(code: code) else {
             print(NetworkError.invalidRequest.localizedDescription)
             completionHandler(.failure(NetworkError.invalidRequest))

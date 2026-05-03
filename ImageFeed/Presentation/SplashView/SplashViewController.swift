@@ -19,11 +19,6 @@ final class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("AZAZ splash did load")
-        
-        //setNeedsStatusBarAppearanceUpdate()
-        //uiAddAppIcon()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,21 +29,11 @@ final class SplashViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //tokenStorage.removeT()
-        print("AZAZ token from st \(tokenStorage.token)")
         if tokenStorage.token != nil {
-            print("AZAZ Using auth token from storage \(tokenStorage.token)")
-            //performSegue(withIdentifier: ConstantsInner.showAuthViewSegueIdentifier, sender: nil)
-
             switchToTabBarController()
         } else {
-            print("AZAZ go to auth")
             performSegue(withIdentifier: ConstantsInner.showAuthViewSegueIdentifier, sender: nil)
         }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        print("AZAZ splash willDisappear")
     }
     
     // MARK: - Navigation
@@ -68,24 +53,20 @@ final class SplashViewController: UIViewController {
 extension SplashViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == ConstantsInner.showAuthViewSegueIdentifier {
-            print("AZAZ splash prepare 1")
             guard
                 let navigationController = segue.destination as? UINavigationController,
                 let authViewController = navigationController.viewControllers.first as? AuthViewController
             else {
-                print("AZAZ splash prepare 2")
                 assertionFailure("Failed to prepare for segue \(ConstantsInner.showAuthViewSegueIdentifier)")
                 return
             }
-            print("AZAZ splash prepare 3")
             authViewController.delegate = self
         } else {
-            print("AZAZ splash prepare 4")
             super.prepare(for: segue, sender: sender)
         }
     }
     
-    // MARK: - UI Initialization
+    // MARK: - UI Initialisation
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
@@ -108,7 +89,6 @@ extension SplashViewController {
 
 extension SplashViewController: AuthViewControllerDelegate {
     func didAuthenticate(_ vc: AuthViewController) {
-        print("AZAZA didAuthenticate")
         vc.dismiss(animated: true)
         switchToTabBarController()
     }

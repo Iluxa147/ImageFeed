@@ -30,8 +30,6 @@ final class AuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("AZAZ AuthView did load")
-        
         buttonAuthorize.layer.cornerRadius = 16
         configureBackButton()
     }
@@ -43,12 +41,6 @@ final class AuthViewController: UIViewController {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
     }
-    
-    
-    // MARK: - Actions
-    //@IBAction func buttonAuthorizeDidTap(_ sender: UIButton) {
-    //    print("AZAZA buttonAuthorizeDidTap")
-    //}
 }
 
 extension AuthViewController {
@@ -66,7 +58,7 @@ extension AuthViewController {
         }
     }
     
-    // MARK: - UI Initialization
+    // MARK: - UI Initialisation
     private func configureBackButton() {
         navigationController?.navigationBar.backIndicatorImage = UIImage(named: ConstantsInner.buttonNavBackWhiteName)
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: ConstantsInner.buttonNavBackWhiteName)
@@ -77,26 +69,16 @@ extension AuthViewController {
 
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        //assert(Thread.isMainThread)
-        print("AZAZ web del 1")
-        //vc.dismiss(animated: true)
         
         fetchOAuthToken(code) { [weak self] result in
             assert(Thread.isMainThread)
-            guard let self else {
-                print("AZAZ self 2 is nil")
-                return
-            }
+            guard let self else { return }
             vc.dismiss(animated: true)
-            print("AZAZ check 1")
             
             switch result {
             case .success(let token):
-                //print("Auth token get succeed \(token)")
                 self.delegate?.didAuthenticate(self)
             case .failure(let error):
-                // TODO handle error further
-                //print("Auth token get failed with error \(error)")
             }
         }
     }
@@ -109,11 +91,6 @@ extension AuthViewController: WebViewViewControllerDelegate {
 extension AuthViewController {
     private func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
         authService.fetchOAuthToken(code: code) { result in
-            //guard self != nil else {
-            //    print("AZAZ self 1 is nil")
-            //    return
-            //}
-            
             DispatchQueue.main.async {
                 completion(result)
             }

@@ -40,7 +40,7 @@ final class ProfileViewController: UIViewController {
         uiAddLabelsProfileDesc()
     }
     
-    // MARK: - UI Initialization
+    // MARK: - UI Initialisation
     
     private func uiAddProfileImage() {
         let imageProfile = UIImage(named: ConstantsInner.profileImageNameMock)
@@ -61,9 +61,9 @@ final class ProfileViewController: UIViewController {
     
     private func uiAddButtonLogout() {
         guard let imageViewProfile,
-        let imageButtonLogout = UIImage(systemName: ConstantsInner.buttonLogoutImageName)
+              let imageButtonLogout = UIImage(systemName: ConstantsInner.buttonLogoutImageName)
         else { return }
-
+        
         let buttonLogout = UIButton.systemButton(
             with: imageButtonLogout,
             target: self,
