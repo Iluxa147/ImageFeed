@@ -15,7 +15,6 @@ final class AuthViewController: UIViewController {
     // MARK: - State
     private enum ConstantsInner {
         static let buttonAuthorizeText = "Войти"
-        static let buttonNavBackBlackName = "button_nav_back_black"
         static let buttonNavBackWhiteName = "button_nav_back_white"
         static let showWebViewSegueIdentifier = "ShowWebView"
     }
@@ -69,7 +68,6 @@ extension AuthViewController {
 
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        
         fetchOAuthToken(code) { [weak self] result in
             assert(Thread.isMainThread)
             guard let self else { return }
@@ -79,6 +77,8 @@ extension AuthViewController: WebViewViewControllerDelegate {
             case .success(let token):
                 self.delegate?.didAuthenticate(self)
             case .failure(let error):
+                // TODO handle an error
+                print(error.localizedDescription)
             }
         }
     }
@@ -91,9 +91,7 @@ extension AuthViewController: WebViewViewControllerDelegate {
 extension AuthViewController {
     private func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
         authService.fetchOAuthToken(code: code) { result in
-            DispatchQueue.main.async {
-                completion(result)
-            }
+            completion(result)
         }
     }
 }

@@ -66,24 +66,8 @@ extension SplashViewController {
         }
     }
     
-    // MARK: - UI Initialisation
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
-    }
-    
-    private func uiAddAppIcon() {
-        let imageAppLogo = UIImage(named: AppUiConstants.appIcon)
-        let imageViewAppLogo = UIImageView(image: imageAppLogo)
-        
-        imageViewAppLogo.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(imageViewAppLogo)
-        NSLayoutConstraint.activate([
-            imageViewAppLogo.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            imageViewAppLogo.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            imageViewAppLogo.heightAnchor.constraint(equalToConstant: 75),
-            imageViewAppLogo.widthAnchor.constraint(equalToConstant: 72),
-        ])
     }
 }
 

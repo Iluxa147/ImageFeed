@@ -15,12 +15,14 @@ final class OAuth2Service {
     
     func fetchOAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
         let completionHandler: (Result<String, Error>) -> Void = { result in
-            assert(Thread.isMainThread)
             switch result {
             case .success(let token):
                 print("Auth token get succeed: \(token)")
             case .failure(let error):
                 print("Auth token get failed with error: \(error.localizedDescription)")
+            }
+            DispatchQueue.main.async {
+                completion(result)
             }
         }
         

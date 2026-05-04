@@ -18,11 +18,6 @@ final class OAuth2TokenStorage {
     
     var token: String? {
         get { ConstantsInner.storage.string(forKey: ConstantsInner.tokenKey) }
-        set {
-            ConstantsInner.storage.set(newValue, forKey: ConstantsInner.tokenKey)
-            ConstantsInner.storage.synchronize()
-        }
+        set { ConstantsInner.storage.set(newValue, forKey: ConstantsInner.tokenKey) }
     }
-    
-    func removeT() { ConstantsInner.storage.removeObject(forKey: ConstantsInner.tokenKey)}
 }
