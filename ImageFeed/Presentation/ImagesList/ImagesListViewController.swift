@@ -8,13 +8,14 @@
 import UIKit
 
 final class ImagesListViewController: UIViewController {
-    private static let showSingleImageSegueIdentifier = "ShowSingleImage"
-    
-    // MARK: - UI
+    // MARK: - IBOutlets
     @IBOutlet private weak var tableView: UITableView!
     
-    // MARK: - State
+    // MARK: - Properties
     let photosNames = (0..<20).map(String.init)
+    
+    // MARK: - Constants
+    private static let showSingleImageSegueIdentifier = "ShowSingleImage"
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -22,20 +23,20 @@ final class ImagesListViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == ImagesListViewController.showSingleImageSegueIdentifier {
-            guard
-                let viewController = segue.destination as? SingleImageViewController,
-                let indexPath = sender as? IndexPath
-            else {
-                assertionFailure("Invalid segue destination")
-                return
-            }
-            
-            let image = UIImage(named: photosNames[indexPath.row])
-            viewController.imageSplash = image
-        } else {
+        guard segue.identifier == ImagesListViewController.showSingleImageSegueIdentifier else {
             super.prepare(for: segue, sender: sender)
+            return
         }
+        
+        guard
+            let viewController = segue.destination as? SingleImageViewController,
+            let indexPath = sender as? IndexPath else {
+            assertionFailure("Failed to prepare for segue \(ImagesListViewController.showSingleImageSegueIdentifier)")
+            return
+        }
+        
+        let image = UIImage(named: photosNames[indexPath.row])
+        viewController.imageSplash = image
     }
 }
 
