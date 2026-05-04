@@ -373,7 +373,7 @@
                                     <constraint firstAttribute="height" constant="24" id="w7J-8A-XXS"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="button_backward"/>
+                                <state key="normal" image="button_nav_back_white"/>
                                 <connections>
                                     <action selector="buttonBackTouchUp:" destination="VCG-O6-nhi" eventType="touchUpInside" id="BYc-lM-cz8"/>
                                 </connections>
@@ -419,9 +419,9 @@
         <image name="0" width="1600" height="1059"/>
         <image name="app_icon" width="72.666664123535156" height="75.333335876464844"/>
         <image name="avatar_mock" width="70" height="70"/>
-        <image name="button_backward" width="24" height="24"/>
         <image name="button_like_on" width="30" height="27"/>
         <image name="button_logout" width="44" height="44"/>
+        <image name="button_nav_back_white" width="24" height="24"/>
         <image name="button_sharing" width="50" height="50"/>
         <image name="logo_unsplash" width="60" height="60"/>
         <image name="tab_editorial_active" width="30" height="30"/>
