@@ -8,16 +8,16 @@
 import UIKit
 
 final class SingleImageViewController: UIViewController {
+    // MARK: - IBOutlets
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var imageViewSplash: UIImageView!
+    
     weak var imageSplash: UIImage? {
         didSet {
             guard isViewLoaded else { return }
             uiInitSplashImage()
         }
     }
-    
-    // MARK: - UI
-    @IBOutlet private weak var scrollView: UIScrollView!
-    @IBOutlet private weak var imageViewSplash: UIImageView!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

@@ -12,20 +12,27 @@ protocol AuthViewControllerDelegate: AnyObject {
 }
 
 final class AuthViewController: UIViewController {
-    // MARK: - State
-    private enum ConstantsInner {
+    // MARK: - IBOutlets
+    @IBOutlet private weak var buttonAuthorize: UIButton!
+    
+    // MARK: - Properties
+    
+    weak var delegate: AuthViewControllerDelegate?
+    private let authService = OAuth2Service.shared
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .darkContent
+    }
+    
+    // MARK: - Constants
+    private enum Constants {
         static let buttonAuthorizeText = "Войти"
         static let buttonNavBackWhiteName = "button_nav_back_white"
         static let showWebViewSegueIdentifier = "ShowWebView"
     }
-    private let authService = OAuth2Service.shared
-    
-    weak var delegate: AuthViewControllerDelegate?
-    
-    // MARK: - UI
-    @IBOutlet private weak var buttonAuthorize: UIButton!
     
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,9 +40,6 @@ final class AuthViewController: UIViewController {
         configureBackButton()
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .darkContent
-    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
@@ -44,23 +48,23 @@ final class AuthViewController: UIViewController {
 
 extension AuthViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == ConstantsInner.showWebViewSegueIdentifier {
-            guard
-                let webViewViewController = segue.destination as? WebViewViewController
-            else {
-                assertionFailure("Failed to prepare for segue \(ConstantsInner.showWebViewSegueIdentifier)")
-                return
-            }
-            webViewViewController.wkNavDelegate = self
-        } else {
+        guard segue.identifier == Constants.showWebViewSegueIdentifier else {
             super.prepare(for: segue, sender: sender)
+            return
         }
+        
+        guard let webViewViewController = segue.destination as? WebViewViewController else {
+            assertionFailure("Failed to prepare for segue \(Constants.showWebViewSegueIdentifier)")
+            return
+        }
+        
+        webViewViewController.delegate = self
     }
     
     // MARK: - UI Initialisation
     private func configureBackButton() {
-        navigationController?.navigationBar.backIndicatorImage = UIImage(named: ConstantsInner.buttonNavBackWhiteName)
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: ConstantsInner.buttonNavBackWhiteName)
+        navigationController?.navigationBar.backIndicatorImage = UIImage(named: Constants.buttonNavBackWhiteName)
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: Constants.buttonNavBackWhiteName)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem?.tintColor = UIColor(resource: ColorResource.ypBlack)
     }

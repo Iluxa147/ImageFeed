@@ -8,8 +8,8 @@
 import UIKit
 
 final class SplashViewController: UIViewController {
-    // MARK: - State
-    private enum ConstantsInner {
+    // MARK: - Constants
+    private enum Constants {
         static let showAuthViewSegueIdentifier = "ShowAuthView"
         static let tabBarViewIdentifier = "TabBarViewController"
     }
@@ -32,7 +32,7 @@ final class SplashViewController: UIViewController {
         if tokenStorage.token != nil {
             switchToTabBarController()
         } else {
-            performSegue(withIdentifier: ConstantsInner.showAuthViewSegueIdentifier, sender: nil)
+            performSegue(withIdentifier: Constants.showAuthViewSegueIdentifier, sender: nil)
         }
     }
     
@@ -44,30 +44,9 @@ final class SplashViewController: UIViewController {
         }
         
         let tabBarController = UIStoryboard(name: "Main", bundle: .main)
-            .instantiateViewController(withIdentifier: ConstantsInner.tabBarViewIdentifier)
+            .instantiateViewController(withIdentifier: Constants.tabBarViewIdentifier)
         
         window.rootViewController = tabBarController
-    }
-}
-
-extension SplashViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == ConstantsInner.showAuthViewSegueIdentifier {
-            guard
-                let navigationController = segue.destination as? UINavigationController,
-                let authViewController = navigationController.viewControllers.first as? AuthViewController
-            else {
-                assertionFailure("Failed to prepare for segue \(ConstantsInner.showAuthViewSegueIdentifier)")
-                return
-            }
-            authViewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .lightContent
     }
 }
 
@@ -75,5 +54,27 @@ extension SplashViewController: AuthViewControllerDelegate {
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true)
         switchToTabBarController()
+    }
+}
+
+extension SplashViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == Constants.showAuthViewSegueIdentifier else {
+            super.prepare(for: segue, sender: sender)
+            return
+        }
+        
+        guard
+            let navigationController = segue.destination as? UINavigationController,
+            let authViewController = navigationController.viewControllers.first as? AuthViewController else {
+            assertionFailure("Failed to prepare for segue \(Constants.showAuthViewSegueIdentifier)")
+            return
+        }
+        
+        authViewController.delegate = self
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
     }
 }

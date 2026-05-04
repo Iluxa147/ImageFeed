@@ -8,16 +8,6 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
-    // MARK: - State
-    private enum ConstantsInner {
-        static let profileImageNameMock = "avatar_mock"
-        static let userNameMock = "Екатерина Новикова"
-        static let userTagMock = "@ekaterina_nov"
-        static let userStatusMock =  "Hello, world!"
-        
-        static let buttonLogoutImageName = "ipad.and.arrow.forward"
-    }
-    
     // MARK: - UI
     private var imageViewProfile: UIImageView?
     private var buttonLogout: UIButton?
@@ -25,10 +15,13 @@ final class ProfileViewController: UIViewController {
     private var labelUserTag: UILabel?
     private var labelUserStatus: UILabel?
     
-    // MARK: - Actions
-    
-    @objc
-    private func buttonLogoutDidTap() {
+    // MARK: - Constants
+    private enum Constants {
+        static let profileImageNameMock = "avatar_mock"
+        static let userNameMock = "Екатерина Новикова"
+        static let userTagMock = "@ekaterina_nov"
+        static let userStatusMock =  "Hello, world!"
+        static let buttonLogoutImageName = "ipad.and.arrow.forward"
     }
     
     // MARK: - Lifecycle
@@ -40,10 +33,15 @@ final class ProfileViewController: UIViewController {
         uiAddLabelsProfileDesc()
     }
     
+    // MARK: - Actions
+    @objc
+    private func buttonLogoutDidTap() {
+    }
+    
     // MARK: - UI Initialisation
     
     private func uiAddProfileImage() {
-        let imageProfile = UIImage(named: ConstantsInner.profileImageNameMock)
+        let imageProfile = UIImage(named: Constants.profileImageNameMock)
         let imageViewProfile = UIImageView(image: imageProfile)
         imageViewProfile.layerSetShapeCircle()
         
@@ -61,7 +59,7 @@ final class ProfileViewController: UIViewController {
     
     private func uiAddButtonLogout() {
         guard let imageViewProfile,
-              let imageButtonLogout = UIImage(systemName: ConstantsInner.buttonLogoutImageName)
+              let imageButtonLogout = UIImage(systemName: Constants.buttonLogoutImageName)
         else { return }
         
         let buttonLogout = UIButton.systemButton(
@@ -87,21 +85,21 @@ final class ProfileViewController: UIViewController {
         guard let imageViewProfile else { return }
         
         labelUserName = uiCreateProfileLabelBase(
-            text: ConstantsInner.userNameMock,
+            text: Constants.userNameMock,
             textColor: ColorResource.ypWhite,
             fontName: AppUiConstants.fontBold,
             fontSize: AppUiConstants.fontSizeBig
         )
         
         labelUserTag = uiCreateProfileLabelBase(
-            text: ConstantsInner.userTagMock,
+            text: Constants.userTagMock,
             textColor: ColorResource.ypGray,
             fontName: AppUiConstants.fontRegular,
             fontSize: AppUiConstants.fontSizeNormal
         )
         
         labelUserStatus = uiCreateProfileLabelBase(
-            text: ConstantsInner.userStatusMock,
+            text: Constants.userStatusMock,
             textColor: ColorResource.ypWhite,
             fontName: AppUiConstants.fontRegular,
             fontSize: AppUiConstants.fontSizeNormal

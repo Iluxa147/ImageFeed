@@ -7,38 +7,40 @@
 
 import Foundation
 
-enum NetworkError: Error {
-    case httpStatusCode(Int)
-    case urlRequestError(Error)
-    case urlSessionError
-    case invalidRequest
-    case decodingError(Error)
-}
-
 extension URLSession {
     func data(
         for request: URLRequest,
         completion: @escaping (Result<Data, Error>) -> Void
     ) -> URLSessionTask {
-        let fulfillCompletionOnTheMainThread: (Result<Data, Error>) -> Void = { result in
-            DispatchQueue.main.async {
-                completion(result)
-            }
-        }
-        
-        let task = dataTask(with: request, completionHandler: { data, response, error in
-            if let data = data, let response = response, let statusCode = (response as? HTTPURLResponse)?.statusCode {
-                if 200 ..< 300 ~= statusCode {
-                    fulfillCompletionOnTheMainThread(.success(data))
-                } else {
-                    fulfillCompletionOnTheMainThread(.failure(NetworkError.httpStatusCode(statusCode)))
+        let task = dataTask(with: request) { data, response, error in
+            func complete(_ result: Result<Data, Error>) {
+                DispatchQueue.main.async {
+                    completion(result)
                 }
-            } else if let error = error {
-                fulfillCompletionOnTheMainThread(.failure(NetworkError.urlRequestError(error)))
-            } else {
-                fulfillCompletionOnTheMainThread(.failure(NetworkError.urlSessionError))
             }
-        })
+            
+            if let error {
+                complete(.failure(NetworkError.urlRequestError(error)))
+                return
+            }
+            
+            guard let httpUrlResponse = response as? HTTPURLResponse else {
+                complete(.failure(NetworkError.urlSessionError))
+                return
+            }
+            
+            guard 200..<300 ~= httpUrlResponse.statusCode else {
+                complete(.failure(NetworkError.httpStatusCode(httpUrlResponse.statusCode)))
+                return
+            }
+            
+            guard let data else {
+                complete(.failure(NetworkError.urlSessionError))
+                return
+            }
+            
+            complete(.success(data))
+        }
         
         return task
     }
